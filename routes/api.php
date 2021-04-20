@@ -30,7 +30,7 @@ Route::group(['prefix' => 'server', 'middleware' => 'auth:api'], function() {
 
     //Route::get('/index', [srcdsModelController::class, 'index']);
     Route::get('/indexUser', [srcdsModelController::class, 'userServers']);
-    Route::get('/server/{id}', [srcdsModelController::class, 'server']);
+    Route::get('/getServer/{id}', [srcdsModelController::class, 'server']);
     Route::post('/create', [srcdsModelController::class, 'create']);
     Route::delete('/destroy/{id}', [srcdsModelController::class, 'destroy']);
 

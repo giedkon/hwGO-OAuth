@@ -9,6 +9,27 @@ window._ = require('lodash');
 window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.CancelToken = axios.CancelToken
+window.axios.isCancel = axios.isCancel
+
+/*
+ * The interceptor here ensures that we check for the token in local storage every time an ajax request is made
+ */
+window.axios.interceptors.request.use(
+    (config) => {
+        let token = localStorage.getItem('access_token')
+
+        if (token) {
+            config.headers['Authorization'] = `Bearer ${ token }`
+        }
+
+        return config
+    },
+
+    (error) => {
+        return Promise.reject(error)
+    }
+)
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

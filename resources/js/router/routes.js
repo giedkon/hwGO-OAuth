@@ -3,11 +3,13 @@ import Login from '../components/auth/Login'
 import Register from '../components/auth/Register'
 import Logout from "../components/auth/Logout";
 
+import Servers from "../components/servers/Servers";
+
 const routes = [
 
     {
         path: '/',
-        name: 'home',
+        name: '/',
         component: Landing
     },
 
@@ -33,6 +35,15 @@ const routes = [
         path: '/logout',
         name: 'logout',
         component: Logout,
+        meta: {
+            requiresAuth: true,
+        }
+    },
+
+    {
+        path: '/servers',
+        name: 'servers',
+        component: Servers,
         meta: {
             requiresAuth: true,
         }

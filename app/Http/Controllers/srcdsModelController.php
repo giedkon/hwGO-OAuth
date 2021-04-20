@@ -77,7 +77,8 @@ class srcdsModelController extends srcdsController
                     ->where('user_id', '=', Auth::user()->id)
                     ->count() > 0;
             if ($user_owns) {
-                return $server->delete();
+                $server->delete();
+                return response()->json('Server successfully removed', 200);
             } else {
                 return response()->json('User does not own this server.', 422);
             }

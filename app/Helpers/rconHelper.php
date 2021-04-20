@@ -4,7 +4,7 @@ if (!function_exists('parse_hlds_status')) {
     {
         $end = strrpos($String, '}');
 
-        $cut = substr($String, 0, $end+1);
+        $cut = substr($String, 0, $end + 1);
         $decoded = json_decode($cut);
 
         return $decoded;
@@ -15,6 +15,7 @@ if (!function_exists('parse_hlds_status')) {
         /*
         *	Parse server parameters
         */
+
 
         $params[0] = array("name" => 'hostname', "pattern" => "^hostname\s*:\s*(.*)$");
         $params[1] = array("name" => 'version', "pattern" => "version\s*:\s*(.*)$");
@@ -35,17 +36,21 @@ if (!function_exists('parse_hlds_status')) {
         */
 
         preg_match('/#(\d+)\s+("GOTV")\s*(\w*)\s*(\w*)\s*(\d*)[\r\n]+/im', $StatusString, $matches);
-        $out['gotv']['bot'] = [
-            'id' => $matches[1],
-            'botname' => $matches[2],
-            'type' => $matches[3],
-            'status' => $matches[4],
-            'tickrate' => $matches[5]];
-        $StatusString = str_replace($matches[0], "", $StatusString);
+
+        if (count($matches) > 0) {
+            $out['gotv']['bot'] = [
+                'id' => $matches[1],
+                'botname' => $matches[2],
+                'type' => $matches[3],
+                'status' => $matches[4],
+                'tickrate' => $matches[5]];
+
+            $StatusString = str_replace($matches[0], "", $StatusString);
+        }
 
         $botAmount = 0;
-        while(preg_match('/#(\d+)\s+("\w+")\s*(\w*)\s*(\w*)\s*(\d*)[\r\n]+/im', $StatusString, $matches)){
-            $out['bots']['bot'.($botAmount+1)] = [
+        while (preg_match('/#\s*(\d+)\s+("\w+")\s*(\w*)\s*(\w*)\s*(\d*)[\r\n]+/im', $StatusString, $matches)) {
+            $out['bots']['bot' . ($botAmount + 1)] = [
                 'id' => $matches[1],
                 'botname' => $matches[2],
                 'type' => $matches[3],
@@ -54,6 +59,7 @@ if (!function_exists('parse_hlds_status')) {
             $botAmount++;
             $StatusString = str_replace($matches[0], "", $StatusString);
         }
+
         $out['botAmount'] = $botAmount;
         // Isolate player data table
         preg_match("/^#/im", $StatusString, $matches, PREG_OFFSET_CAPTURE);
@@ -69,6 +75,7 @@ if (!function_exists('parse_hlds_status')) {
 
         // Parse header
         $header = explode_by_whitespace(array_shift($PlayerDataArray));
+
 
         // Parse player data
         $playerAmount = 0;
@@ -97,7 +104,7 @@ if (!function_exists('parse_hlds_status')) {
             'state' => $player[6],
             'rate' => $player[7],
             'ip' => $player[8]
-            ];
+        ];
         return $temp;
     }
 

@@ -24,7 +24,7 @@ class srcdsController extends Controller
     public function pingServer(rconRequest $request)
     {
         try {
-            $this->rcon->Connect($request['address'], $request['port'], 5, $this->engine);
+            $this->rcon->Connect($request['address'], $request['port'], 3, $this->engine);
             $this->rcon->SetRconPassword($request['password']);
             return response()->json(parse_hlds_status($this->rcon->Rcon('status'), 200));
         } catch (\Exception $e) {
@@ -37,7 +37,7 @@ class srcdsController extends Controller
     public function checkAvailability(rconRequest $request)
     {
         try {
-            $this->rcon->Connect($request['address'], $request['port'], 5, $this->engine);
+            $this->rcon->Connect($request['address'], $request['port'], 3, $this->engine);
             $this->rcon->SetRconPassword($request['password']);
             return response()->json(rcon_json_parse($this->rcon->Rcon('get5_web_avaliable')), 200);
         } catch (\Exception $e) {
