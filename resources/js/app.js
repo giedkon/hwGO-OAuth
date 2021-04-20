@@ -1,11 +1,11 @@
 require('./bootstrap');
 
 import Vue from 'vue'
-import VueRouter from 'vue-router'
 import { router } from './router'
 import App from './components/App'
 import { vuetify } from "./plugins/vuetify";
 import { store } from "./store";
+
 
 window.eventBus = new Vue()
 

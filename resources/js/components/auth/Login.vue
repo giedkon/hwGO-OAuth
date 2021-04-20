@@ -4,7 +4,7 @@
             <v-row>
                 <v-spacer md="3" sm="2"></v-spacer>
                 <v-col cols="12"  md="6" sm="8">
-                    <v-alert v-if="error" dense border="bottom" type="error">
+                    <v-alert v-if="error" type="error" style="white-space: pre-line">
                         {{ error }}
                     </v-alert>
                 </v-col>
@@ -13,7 +13,7 @@
             <v-row align-self="center">
                 <v-spacer  md="3" sm="2"></v-spacer>
                 <v-col cols="12" md="6" sm="8">
-                    <v-text-field outlined v-model="form.email" label="Name" placeholder="username">
+                    <v-text-field outlined v-model="form.email" label="E-mail" placeholder="username">
 
                     </v-text-field>
                 </v-col>
@@ -48,6 +48,8 @@
 </template>
 
 <script>
+import {errorHandler} from "../../helpers/error_to_alert";
+
 export default {
     name: "Login.vue",
     data() {
@@ -58,7 +60,7 @@ export default {
                 email: '',
                 password: '',
             },
-            error: null,
+            error: "",
         }
     },
     methods: {
@@ -70,7 +72,7 @@ export default {
                 this.$router.push('/');
             }).catch(error => {
                 console.log(error);
-                this.error = error.response.data;
+                this.error = errorHandler.alertError(error);
             });
         }
     }

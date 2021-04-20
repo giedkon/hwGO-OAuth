@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegistrationRequest;
 use App\Models\User;
+use GuzzleHttp\Client;
 use GuzzleHttp\Exception\BadResponseException;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
-        $http = new \GuzzleHttp\Client;
+        $http = new Client;
 
         try {
             $response = $http->post(config('services.passport.login_endpoint'), [
@@ -28,7 +29,7 @@ class AuthController extends Controller
             return $response->getBody();
         } catch (BadResponseException $e) {
             if ($e->getCode() === 400) {
-                return response()->json("Invalid e-mail or password." , $e->getCode());
+                return response()->json("Invalid credentials. Please try again." , $e->getCode());
             }
 
             return response()->json('Something went wrong on the server.', $e->getCode());
