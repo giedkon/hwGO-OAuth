@@ -1,10 +1,17 @@
 <template>
     <v-container>
-        <v-card elevation="4" outlined v-if="currentInstance">
+        <v-card v-if="currentInstance" elevation="4" outlined>
             <v-card-title>
-                <v-img max-height="64" max-width="128" contain :src="currentInstance.image_small">
+                <v-img :src="currentInstance.image_small" contain max-height="64" max-width="128">
                 </v-img>
-                {{currentInstance.name}}
+                <v-select :items="instances"
+                          :value="{'id': parseInt(this.$store.state.instance.instance)}"
+                          hide-details="auto"
+                          item-text="name"
+                          item-value="id"
+                          @input="changedInstance">
+
+                </v-select>
                 <v-spacer></v-spacer>
                 <v-btn
                     class="mr-2"
@@ -47,7 +54,7 @@
                 Currently nothing here, but an instance will hold teams / players / matches
             </v-card-text>
         </v-card>
-        <v-card elevation="4" outlined v-else>
+        <v-card v-else elevation="4" outlined>
             <v-card-title>
                 NO INSTANCE SELECTED
                 <v-spacer></v-spacer>
@@ -70,11 +77,11 @@ export default {
     name: "Landing",
     components: {InstanceForm},
     computed: {
-      ...mapGetters([
-          'instance',
-          'currentInstance',
-          'instances',
-      ])
+        ...mapGetters([
+            'instance',
+            'currentInstance',
+            'instances',
+        ])
     },
     data() {
         return {
@@ -84,6 +91,9 @@ export default {
         }
     },
     methods: {
+        changedInstance(event) {
+            this.$store.dispatch('setInstance', event);
+        },
         fetchServers() {
             this.$store.dispatch('fetchInstances', {}).then(response => {
             }).catch(error => {
