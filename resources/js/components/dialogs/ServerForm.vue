@@ -112,6 +112,7 @@ export default {
     },
     methods: {
         clearForm() {
+            this.errors = '',
             this.form.id = null;
             this.form.name = '';
             this.form.ip = '';
@@ -120,6 +121,7 @@ export default {
             this.form.rcon = '';
         },
         updateForm() {
+            this.errors = '',
             this.form.id = this.server.id;
             this.form.name = this.server.name;
             this.form.ip = this.server.server_ip;

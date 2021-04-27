@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\instanceController;
 use App\Http\Controllers\srcdsController;
 use App\Http\Controllers\srcdsModelController;
 use Illuminate\Http\Request;
@@ -32,9 +33,19 @@ Route::group(['prefix' => 'server', 'middleware' => 'auth:api'], function() {
     Route::get('/indexUser', [srcdsModelController::class, 'userServers']);
     Route::get('/getServer/{id}', [srcdsModelController::class, 'server']);
     Route::post('/create', [srcdsModelController::class, 'create']);
-    Route::post('/update', [srcdsModelController::class, 'update']);
+    Route::patch('/update', [srcdsModelController::class, 'update']);
     Route::delete('/destroy/{id}', [srcdsModelController::class, 'destroy']);
 
     Route::post('/ping', [srcdsController::class, 'pingServer']);
     Route::post('/check', [srcdsController::class, 'checkAvailability']);
+});
+
+Route::group(['prefix' => 'instance', 'middleware' => 'auth:api'], function() {
+
+    Route::get('/indexUser', [instanceController::class, 'userInstances']);
+    Route::post('/create', [instanceController::class, 'create']);
+    // Cannot use PATCH as PHP has limitations for sending files
+    Route::post('/update', [instanceController::class, 'update']);
+    Route::delete('/destroy/{id}', [instanceController::class, 'destroy']);
+
 });

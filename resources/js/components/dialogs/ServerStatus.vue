@@ -3,7 +3,7 @@
         v-model="show"
         width="1000"
     >
-        <v-card v-if="server">
+        <v-card v-if="server" :loading="loadingStatus">
             <v-card-title class="headline lighten-2">
                 <v-col>
                     {{ server.name }}
@@ -187,6 +187,7 @@ export default {
             dialog: false,
             status: null,
             errors: "",
+            loadingStatus: true,
             playerHeaders: [
                 {text: "#ID", align: "center", value: "id", sortable: true,},
                 {text: "Name", value: "name", sortable: true},
@@ -210,6 +211,7 @@ export default {
     },
     methods: {
         getServerStatus(formatted) {
+            this.loadingStatus = true;
             this.errors = '';
             this.status = null;
             axios.post('server/ping', {
@@ -218,9 +220,11 @@ export default {
                 password: this.server.password,
                 formatted: formatted,
             }).then(response => {
+                this.loadingStatus = false;
                 this.status = response.data;
                 this.errors = null;
             }).catch(error => {
+                this.loadingStatus = false;
                 this.status = null;
                 this.errors = errorHandler.alertError(error);
             })

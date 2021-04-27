@@ -1,6 +1,6 @@
 import {authModule} from "./authStore";
 
-export const serverStore = {
+export const serverModule = {
     state: {
         servers: [],
     },
@@ -41,7 +41,7 @@ export const serverStore = {
         },
         async updateServer(context, payload) {
             return new Promise((resolve, reject) => {
-                axios.post('server/update', {
+                axios.patch('server/update', {
                     id: payload.id,
                     name: payload.name,
                     address: payload.ip,
