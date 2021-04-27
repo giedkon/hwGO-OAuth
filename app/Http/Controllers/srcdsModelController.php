@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\rconRequest;
 use App\Http\Requests\srcdsServerCreateRequest;
 use App\Http\Requests\srcdsServerDestroyRequest;
+use App\Http\Requests\srcdsServerUpdateRequest;
 use App\Models\Server;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -55,6 +56,7 @@ class srcdsModelController extends srcdsController
                     'name' => $request['name'],
                     'server_ip' => $request['address'],
                     'server_port' => $request['port'],
+                    'gotv_port' => $request['gotv_port'],
                     'password' => $request['password'],
                 ]);
                 $server->users()->save($user);
@@ -64,6 +66,36 @@ class srcdsModelController extends srcdsController
             }
         } else {
             return response()->json("Server is already registered.", 422);
+        }
+    }
+    public function update(srcdsServerUpdateRequest $request)
+    {
+        $toRcon = rconRequest::createFrom($request);
+        if ($server = Server::findOrFail($request['id'])) {
+            $user_owns = DB::table('server_user')
+                    ->where('server_id', '=', $server->id)
+                    ->where('user_id', '=', Auth::user()->id)
+                    ->count() > 0;
+            if ($user_owns) {
+
+                $get5check = $this->checkAvailability($toRcon);
+                if ($get5check->status() === 200) {
+                    $server->update([
+                        'name' => $request['name'],
+                        'server_ip' => $request['address'],
+                        'server_port' => $request['port'],
+                        'gotv_port' => $request['gotv_port'],
+                        'password' => $request['password'],
+                    ]);
+                    return $server;
+                } else {
+                    return response()->json("Could not connect to the server. " . $get5check->original, 422);
+                }
+            } else {
+                return response()->json("Server does not belong to you.", 422);
+            }
+        } else {
+            return response()->json("Server not found.", 422);
         }
     }
 

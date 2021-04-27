@@ -23,10 +23,12 @@ class rconRequest extends FormRequest
      */
     public function rules()
     {
+        // TODO Rcon Validation
         return [
             'address' => '',
             'port' => '',
             'password' => '',
+            'formated' => '',
         ];
     }
 }

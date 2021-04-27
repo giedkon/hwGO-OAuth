@@ -1,13 +1,18 @@
 <template>
     <v-toolbar>
-        <v-app-bar-nav-icon></v-app-bar-nav-icon>
-        <v-toolbar-title>hwGO</v-toolbar-title>
+        <v-img
+            class="mx-2"
+            contain
+            max-height="40"
+            max-width="40"
+            src="storage/logo.svg"
+        ></v-img>
         <v-spacer></v-spacer>
         <div v-if="loggedIn">
             <router-link to="/servers">
-                <v-btn elevation="0"
+                <v-btn class=" white--text"
 
-                    class=" white--text"
+                       elevation="0"
                 >
                     Servers
                     <v-icon
@@ -21,7 +26,7 @@
         <div v-if="!loggedIn">
             <router-link to="/login">
 
-                <v-btn elevation="0" class=" white--text">
+                <v-btn class=" white--text" elevation="0">
                     Login
                     <v-icon right>mdi-login-variant</v-icon>
                 </v-btn>
@@ -29,7 +34,7 @@
         </div>
         <div v-else>
             <router-link to="/logout">
-                <v-btn elevation="0" class=" white--text">
+                <v-btn class=" white--text" elevation="0">
                     Logout
                     <v-icon right>mdi-logout-variant</v-icon>
                 </v-btn>

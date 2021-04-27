@@ -10,7 +10,7 @@ class Server extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['name', 'server_ip', 'server_port', 'password'];
+    protected $fillable = ['name', 'server_ip', 'server_port', 'password', 'gotv_port'];
 
     public function users()
     {

@@ -7,6 +7,7 @@ import { vuetify } from "./plugins/vuetify";
 import { store } from "./store";
 
 
+
 window.eventBus = new Vue()
 
 Vue.config.productionTip = false

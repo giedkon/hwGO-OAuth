@@ -26,6 +26,7 @@ class ServerFactory extends Factory
            'name' => $this->faker->name,
            'server_ip' => $this->faker->ipv4,
            'server_port' => $this->faker->numberBetween(0, 65535),
+           'gotv_port' => $this->faker->numberBetween(0, 65535),
            'password' => 'password', // password
        ];
     }

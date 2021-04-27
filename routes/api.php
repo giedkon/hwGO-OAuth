@@ -32,6 +32,7 @@ Route::group(['prefix' => 'server', 'middleware' => 'auth:api'], function() {
     Route::get('/indexUser', [srcdsModelController::class, 'userServers']);
     Route::get('/getServer/{id}', [srcdsModelController::class, 'server']);
     Route::post('/create', [srcdsModelController::class, 'create']);
+    Route::post('/update', [srcdsModelController::class, 'update']);
     Route::delete('/destroy/{id}', [srcdsModelController::class, 'destroy']);
 
     Route::post('/ping', [srcdsController::class, 'pingServer']);
