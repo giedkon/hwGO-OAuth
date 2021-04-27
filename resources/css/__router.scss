@@ -1,0 +1,16 @@
+a {
+    text-decoration: none;
+}
+router-link{
+    text-decoration: none;
+}
+
+.router-link-exact-active .v-list-item {
+    background: #f1741d !important;
+}
+.router-link-exact-active button {
+    background: #f1741d !important;
+}
+.router-link-active button{
+    background: #f1741d !important;
+}
