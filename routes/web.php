@@ -14,4 +14,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/{any}', [SPAController::class, 'index'])->where('any', '.*');
+Route::get('/{any}', [SPAController::class, 'index'])->where('any', '^((?!storage).)*');

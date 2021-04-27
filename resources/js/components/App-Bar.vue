@@ -1,13 +1,31 @@
 <template>
-    <v-toolbar>
-        <v-img
+    <v-app-bar dense>
+        <v-app-bar-nav-icon
             class="mx-2"
             contain
             max-height="40"
             max-width="40"
-            src="storage/logo.svg"
-        ></v-img>
+        ></v-app-bar-nav-icon>
+        <router-link to="/">
+            <v-app-bar-title>
+                hwGO
+            </v-app-bar-title>
+        </router-link>
         <v-spacer></v-spacer>
+
+        <v-col cols="1">
+
+        </v-col>
+        <v-col cols="2">
+            <v-select :items="instances"
+                      :value="{'id': parseInt(this.$store.state.instance.instance)}"
+                      hide-details="auto"
+                      item-text="name"
+                      item-value="id"
+                      @input="changedInstance">
+
+            </v-select>
+        </v-col>
         <div v-if="loggedIn">
             <router-link to="/servers">
                 <v-btn class=" white--text"
@@ -40,7 +58,7 @@
                 </v-btn>
             </router-link>
         </div>
-    </v-toolbar>
+    </v-app-bar>
 </template>
 <script>
 import {mapGetters} from "vuex";
@@ -49,14 +67,21 @@ import {mapActions} from "vuex";
 export default {
     el: '#app',
     computed: {
-        loggedIn() {
-            return this.$store.getters.loggedIn
-        }
+        ...mapGetters([
+            'instance',
+            'instances',
+            'loggedIn'
+        ])
     },
     data() {
         return {
             authenticated: '',
         }
     },
+    methods: {
+        changedInstance(event) {
+            this.$store.dispatch('setInstance', event);
+        }
+    }
 }
 </script>
