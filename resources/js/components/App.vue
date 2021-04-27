@@ -12,5 +12,13 @@ import AppFooter from "./App-Footer";
 import AppBar from "./App-Bar";
 export default {
     components: {AppBar, AppFooter},
+    watch: {
+        '$route':{
+            handler: (to, from) => {
+                document.title = to.meta.title || 'Your Website'
+            },
+            immediate: true
+        }
+    },
 }
 </script>

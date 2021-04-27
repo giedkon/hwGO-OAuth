@@ -3,12 +3,17 @@ import Login from '../components/auth/Login'
 import Register from '../components/auth/Register'
 import Logout from "../components/auth/Logout";
 
+import Servers from "../components/servers/Servers";
+
 const routes = [
 
     {
         path: '/',
-        name: 'home',
-        component: Landing
+        name: '/',
+        component: Landing,
+        meta: {
+            title: 'hwGO'
+        }
     },
 
     {
@@ -16,6 +21,7 @@ const routes = [
         name: 'register',
         component: Register,
         meta: {
+            title: 'Register | hwGO',
             requiresVisitor: true,
         }
     },
@@ -25,6 +31,7 @@ const routes = [
         name: 'login',
         component: Login,
         meta: {
+            title: 'Login | hwGO',
             requiresVisitor: true,
         }
     },
@@ -34,6 +41,17 @@ const routes = [
         name: 'logout',
         component: Logout,
         meta: {
+            title: 'Logout | hwGO',
+            requiresAuth: true,
+        }
+    },
+
+    {
+        path: '/servers',
+        name: 'servers',
+        component: Servers,
+        meta: {
+            title: 'Servers | hwGO',
             requiresAuth: true,
         }
     },
