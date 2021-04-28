@@ -4,6 +4,7 @@ import Register from '../components/auth/Register'
 import Logout from "../components/auth/Logout";
 
 import Servers from "../components/servers/Servers";
+import Teams from "../components/teams/Teams";
 
 const routes = [
 
@@ -52,6 +53,16 @@ const routes = [
         component: Servers,
         meta: {
             title: 'Servers | hwGO',
+            requiresAuth: true,
+        }
+    },
+
+    {
+        path: '/teams',
+        name: 'teams',
+        component: Teams,
+        meta: {
+            title: 'Teams | hwGO',
             requiresAuth: true,
         }
     },

@@ -1,7 +1,7 @@
 <template>
     <v-app>
         <AppBar></AppBar>
-        <v-container fill-height>
+        <v-container justify-start align-content-start fill-height>
             <router-view></router-view>
         </v-container>
         <AppFooter></AppFooter>

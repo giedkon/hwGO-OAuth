@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\instanceController;
 use App\Http\Controllers\srcdsController;
 use App\Http\Controllers\srcdsModelController;
+use App\Http\Controllers\steamApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -49,3 +50,12 @@ Route::group(['prefix' => 'instance', 'middleware' => 'auth:api'], function() {
     Route::delete('/destroy/{id}', [instanceController::class, 'destroy']);
 
 });
+
+Route::group(['prefix' => 'steamApi', 'middleware' => 'auth:api'], function() {
+
+    Route::get('/userInfo/{steam_id}', [steamApiController::class, 'getUserInfoBySteamID']);
+    Route::get('/userBanInfo/{steam_id}', [steamApiController::class, 'getUserBanInfoBySteamID']);
+    Route::get('/userCsgoInfo/{steam_id}', [steamApiController::class, 'getUserCsgoInfoBySteamID']);
+
+});
+

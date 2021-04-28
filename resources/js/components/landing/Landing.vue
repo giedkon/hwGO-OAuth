@@ -56,7 +56,15 @@
         </v-card>
         <v-card v-else elevation="4" outlined>
             <v-card-title>
-                NO INSTANCE SELECTED
+                No instance selected
+                <v-select :items="instances"
+                          :value="{'id': parseInt(this.$store.state.instance.instance)}"
+                          hide-details="auto"
+                          item-text="name"
+                          item-value="id"
+                          @input="changedInstance">
+
+                </v-select>
                 <v-spacer></v-spacer>
             </v-card-title>
             <v-divider></v-divider>

@@ -12,6 +12,20 @@
         </router-link>
         <v-spacer></v-spacer>
 
+
+        <div v-if="loggedIn" v-show="$vuetify.breakpoint.mdAndUp">
+            <router-link to="/teams">
+                <v-btn elevation="0"
+                >
+                    Teams
+                    <v-icon
+                        right
+                    >
+                        mdi-account-group
+                    </v-icon>
+                </v-btn>
+            </router-link>
+        </div>
         <div v-if="loggedIn" v-show="$vuetify.breakpoint.mdAndUp">
             <router-link to="/servers">
                 <v-btn elevation="0"
@@ -25,6 +39,7 @@
                 </v-btn>
             </router-link>
         </div>
+
         <div v-if="!loggedIn" v-show="$vuetify.breakpoint.mdAndUp">
             <router-link to="/login">
                 <v-btn small elevation="0">
@@ -54,6 +69,16 @@
             </template>
 
             <v-list>
+                <router-link v-if="loggedIn" to="/teams">
+                    <v-list-item link>
+                        <v-list-item-content>
+                            Teams
+                        </v-list-item-content>
+                        <v-list-item-icon>
+                            <v-icon>mdi-account-group</v-icon>
+                        </v-list-item-icon>
+                    </v-list-item>
+                </router-link>
                 <v-divider></v-divider>
                 <router-link v-if="loggedIn" to="/servers">
                     <v-list-item link>
