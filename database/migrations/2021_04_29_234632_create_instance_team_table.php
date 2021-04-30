@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePlayersTable extends Migration
+class CreateInstanceTeamTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreatePlayersTable extends Migration
      */
     public function up()
     {
-        Schema::create('players', function (Blueprint $table) {
+        Schema::create('instance_team', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('steam_id')->unique();
             $table->timestamps();
+            $table->foreignId('team_id')->references('id')->on('teams')->cascadeOnDelete();
+            $table->foreignId('instance_id')->references('id')->on('instances')->cascadeOnDelete();
         });
     }
 
@@ -27,6 +28,6 @@ class CreatePlayersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('players');
+        Schema::dropIfExists('team_instance_user');
     }
 }

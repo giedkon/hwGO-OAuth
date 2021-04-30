@@ -16,19 +16,16 @@
             <v-divider></v-divider>
             <v-card-text>
                 <form class="pt-12">
-                    <v-text-field v-model="form.name" dense label="Instance Name" outlined placeholder="Tournament #1">
+                    <v-text-field v-model="form.name" label="Instance Name" outlined placeholder="Tournament #1">
 
                     </v-text-field>
 
 
-                    <v-text-field :value='this.form.image ? this.form.image[0].name : ""' hide-details="auto" readonly>
-
-                        <template v-slot:prepend>
-                            <v-btn @click.stop="uploadDialog = true">Upload Image</v-btn>
-                        </template>
+                    <v-text-field dense class="pb-6" outlined :value='this.form.image ? this.form.image[0].name : ""' hide-details="auto" readonly>
 
                     </v-text-field>
 
+                    <v-btn small @click.stop="uploadDialog = true" class="">Upload Image <v-icon dark right>mdi-cloud-upload</v-icon></v-btn>
 
                     <upload-dialog :dialog.sync="uploadDialog" @filesUploaded="processUpload($event)"></upload-dialog>
 

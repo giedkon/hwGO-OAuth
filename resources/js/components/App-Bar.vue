@@ -1,13 +1,13 @@
 <template>
     <v-app-bar>
         <router-link to="/">
-            <v-app-bar-title>
+            <v-app-bar-title v-if="currentInstance">
                     <v-img max-height="64" max-width="64" :src="currentInstance.image"></v-img>
             </v-app-bar-title>
         </router-link>
         <router-link to="/">
         <div class="pa-6">
-            hwGO // {{currentInstance.name}}
+            hwGO <span v-if="currentInstance">// {{currentInstance.name}}</span>
         </div>
         </router-link>
         <v-spacer></v-spacer>

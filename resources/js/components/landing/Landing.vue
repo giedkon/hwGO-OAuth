@@ -66,6 +66,18 @@
 
                 </v-select>
                 <v-spacer></v-spacer>
+                <v-btn
+                    class="mr-2"
+                    color="primary"
+                    elevation="0"
+                    fab
+                    x-small
+                    @click.stop="showFormDialog=true; selected=null"
+                >
+                    <v-icon dark small>
+                        mdi-plus
+                    </v-icon>
+                </v-btn>
             </v-card-title>
             <v-divider></v-divider>
             <v-card-text>

@@ -5,8 +5,9 @@ import { router } from './router'
 import App from './components/App'
 import { vuetify } from "./plugins/vuetify";
 import { store } from "./store";
+import CountryFlag from 'vue-country-flag'
 
-
+Vue.component('country-flag', CountryFlag)
 
 window.eventBus = new Vue()
 

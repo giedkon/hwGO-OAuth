@@ -5,6 +5,7 @@ use App\Http\Controllers\instanceController;
 use App\Http\Controllers\srcdsController;
 use App\Http\Controllers\srcdsModelController;
 use App\Http\Controllers\steamApiController;
+use App\Http\Controllers\TeamController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -51,11 +52,24 @@ Route::group(['prefix' => 'instance', 'middleware' => 'auth:api'], function() {
 
 });
 
+Route::group(['prefix' => 'team', 'middleware' => 'auth:api'], function() {
+
+    //Route::get('/index', [srcdsModelController::class, 'index']);
+    Route::get('/indexInstance', [TeamController::class, 'instanceTeams']);
+    Route::get('/getServer/{id}', [TeamController::class, 'team']);
+    Route::post('/create', [TeamController::class, 'create']);
+    Route::patch('/update', [TeamController::class, 'update']);
+    Route::delete('/destroy/{id}', [TeamController::class, 'destroy']);
+
+    Route::post('/ping', [srcdsController::class, 'pingServer']);
+    Route::post('/check', [srcdsController::class, 'checkAvailability']);
+});
+
 Route::group(['prefix' => 'steamApi', 'middleware' => 'auth:api'], function() {
 
-    Route::get('/userInfo/{steam_id}', [steamApiController::class, 'getUserInfoBySteamID']);
-    Route::get('/userBanInfo/{steam_id}', [steamApiController::class, 'getUserBanInfoBySteamID']);
-    Route::get('/userCsgoInfo/{steam_id}', [steamApiController::class, 'getUserCsgoInfoBySteamID']);
+    Route::get('/userInfo', [steamApiController::class, 'getUserInfoBySteamID']);
+    Route::get('/userBanInfo', [steamApiController::class, 'getUserBanInfoBySteamID']);
+    Route::get('/userCsgoInfo', [steamApiController::class, 'getUserCsgoInfoBySteamID']);
 
 });
 

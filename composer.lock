@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e05b540615bc21d7901ea8a3237c540d",
+    "content-hash": "d8a0c66546c33cf97b05be9a9b99c2a2",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -117,6 +117,57 @@
                 }
             ],
             "time": "2021-01-20T22:51:39+00:00"
+        },
+        {
+            "name": "chx2/steamidparser",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/chx2/Parse-Steam-URL-Class.git",
+                "reference": "a8bdf8698a9cc119acc169fccfc01909a24d651d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/chx2/Parse-Steam-URL-Class/zipball/a8bdf8698a9cc119acc169fccfc01909a24d651d",
+                "reference": "a8bdf8698a9cc119acc169fccfc01909a24d651d",
+                "shasum": ""
+            },
+            "require": {
+                "ext-bcmath": "*",
+                "guzzlehttp/guzzle": "^7.2",
+                "php": ">=7.1.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "chx2\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Christopher O. Hackett",
+                    "email": "crishack8@gmail.com",
+                    "homepage": "https://chrish.me",
+                    "role": "web application developer"
+                }
+            ],
+            "description": "A PHP class to convert Steam Profile URLS to SteamID, Community, and UserID's",
+            "homepage": "https://github.com/chx2/Parse-Steam-URL-Class",
+            "keywords": [
+                "communityid",
+                "steamid",
+                "valve"
+            ],
+            "support": {
+                "issues": "https://github.com/chx2/Parse-Steam-URL-Class/issues",
+                "source": "https://github.com/chx2/Parse-Steam-URL-Class/tree/master"
+            },
+            "time": "2021-01-19T20:59:40+00:00"
         },
         {
             "name": "defuse/php-encryption",
@@ -8437,7 +8488,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "chx2/steamidparser": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

@@ -18,7 +18,7 @@
                         @click.stop="showFormDialog=true; selected=null"
                     >
                         Add new server
-                        <v-icon dark>
+                        <v-icon dark right>
                             mdi-plus-network
                         </v-icon>
                     </v-btn>
@@ -26,7 +26,7 @@
                 </v-col>
             </v-row>
 
-            <v-data-table :headers="headers" :items="allServers.servers" class="elevation-2 pt-4" disable-filtering
+            <v-data-table :loading="loadingServers" :headers="headers" :items="allServers" class="elevation-2 pt-4" disable-filtering
                           light>
 
                 <template v-slot:item.actions="{item}">
@@ -98,14 +98,15 @@ import {errorHandler} from "../../helpers/error_to_alert";
 import ServerStatus from "../dialogs/ServerStatus";
 import CopyToClipBoardButton from "../utility/CopyToClipBoardButton";
 import ServerForm from "../dialogs/ServerForm";
+import {mapGetters} from "vuex";
 
 export default {
     name: "Servers.vue",
     components: {ServerForm, CopyToClipBoardButton, ServerStatus},
     computed: {
-        allServers() {
-            return this.$store.state.servers
-        }
+        ...mapGetters([
+            'allServers'
+        ])
     },
     data() {
         return {

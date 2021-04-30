@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class steamIdRequest extends FormRequest
+class instanceIdRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class steamIdRequest extends FormRequest
     public function rules()
     {
         return [
-            'steam_id' => 'required|integer'
+            'instance_id' => 'required|exists:instances,id'
         ];
     }
 }

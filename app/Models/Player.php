@@ -13,6 +13,11 @@ class Player extends Model
 
     protected $fillable = ['steam_id'];
 
+    public function teams()
+    {
+        return $this->belongsToMany(Team::class);
+    }
+
     public function getSteamInfoAttribute()
     {
         $client = new Client();
